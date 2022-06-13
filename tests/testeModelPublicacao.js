@@ -6,5 +6,3 @@ Publicacao.findByPk(2, {include:["autor","curtidores"]}).then(
         sequelize.close();
     }
 )
-
-

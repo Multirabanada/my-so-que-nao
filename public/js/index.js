@@ -19,7 +19,7 @@ const onFileChange = evento => {
 let inputNome = document.getElementById('nome');
 let inputEmail = document.querySelector('#registro > form input[type=email]');
 let inputSenha = document.querySelector('#registro > form input[type=password]');
-let inputConfirmacao = document.querySelector('#registro > form input[name=confirmacao]');
+let inputCofirmacao = document.querySelector('#registro > form input[type=password][name=confirmacao]');
 let inputFile = document.querySelector('#registro > form input[type=file]');
 let form = document.getElementById('formularioCadastro');
 
@@ -29,6 +29,7 @@ let form = document.getElementById('formularioCadastro');
 inputNome.addEventListener('blur', verificaCampoPreenchido);
 inputEmail.addEventListener('blur', verificaCampoPreenchido);
 inputSenha.addEventListener('blur', verificaCampoPreenchido);
+inputCofirmacao.addEventListener('blur', verificaCampoPreenchido);
 inputFile.addEventListener('change', onFileChange);
 form.addEventListener(
     'submit',
@@ -61,8 +62,6 @@ form.addEventListener(
         );
     }
 );
-
-
 
 
 
