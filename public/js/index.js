@@ -33,7 +33,7 @@ inputCofirmacao.addEventListener('blur', verificaCampoPreenchido);
 inputFile.addEventListener('change', onFileChange);
 form.addEventListener(
     'submit',
-    (evt)=>{
+    async (evt) =>{
 
         // Impedir o formulário de ser enviado...
         evt.preventDefault();
@@ -49,25 +49,39 @@ form.addEventListener(
         //     senha: inputSenha.value
         // }
 
-        // fetch
-        fetch(
+        // Enviando o formData para o servidor
+        // Usando a funcao fetch
+        let response = await fetch(
             'http://localhost:3000/api/v1/usuarios',
             {
                 method:'POST',
                 body: formData,
-                // headers:{'Content-Type': 'application/json'}
-                // headers:{'Content-Type': 'application/x-www-form-urlencoded'}
-                // headers:{'Content-Type': 'multipart/form-data'}
             }
         );
+        if(response.status == 409){alert("Usuário já cadstrado")}
+        if(response.status == 500){alert("Erro. Tente novamente mais tarde.")}
+        if(response.status == 201){
+            let usuario = await response.json();
+            mostarApp(usuario);
+        }
     }
 );
 
-
-
-
-
-
+function mostarApp(usuario){
+    console.log(usuario)
+    //Esconder a div de registro
+    document.getElementById('registro').style.display = 'none';
+    //Mostar a div de App
+    document.getElementById('app').style.display = 'block';
+    //Preencher os locais com as informacoes do usuario
+    document.getElementById('app-nome').innerText = usuario.nome;
+    let aEmail = document.getElementById('app-email');
+    aEmail.innerText = usuario.email;
+    aEmail.setAttribute('href',`mailto:${usuario.email}`);
+    let imgAvatar = document.getElementById('app-avatar');
+    imgAvatar.setAttribute('alt',`Foto de ${usuario.nome}`);
+    imgAvatar.setAttribute('src',`img/avatares/${usuario.foto}`);
+}
 
 
 
@@ -132,4 +146,3 @@ for (let i = 0; i < amigos.length; i++) {
 
 // 2 - Injetar essa string no elemento listaDeAmigos
 listaDeAmigos.innerHTML += string;
-
