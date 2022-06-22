@@ -1,11 +1,11 @@
 // Verificar se o email foi preenchdo
-const verificaCampoPreenchido = (evento)=>{
-    if(evento.target.value == ''){
+const verificaCampoPreenchido = (evento) => {
+    if (evento.target.value == '') {
         evento.target.style.outline = "2px solid #993300";
-        evento.target.setAttribute('placeholder',`Preencha o campo ${evento.target.name}!`)
+        evento.target.setAttribute('placeholder', `Preencha o campo ${evento.target.name}!`)
     } else {
         evento.target.style.outline = "none";
-        evento.target.setAttribute('placeholder','')
+        evento.target.setAttribute('placeholder', '')
     }
 }
 
@@ -22,6 +22,7 @@ let inputSenha = document.querySelector('#registro > form input[type=password]')
 let inputCofirmacao = document.querySelector('#registro > form input[type=password][name=confirmacao]');
 let inputFile = document.querySelector('#registro > form input[type=file]');
 let form = document.getElementById('formularioCadastro');
+let formLogin = document.getElementById('formularioLogin');
 
 // 2 - Associar ao evento "perdeu o foco" uma função
 // 3 - A função vai avisar ao usuário que o campo de
@@ -31,16 +32,15 @@ inputEmail.addEventListener('blur', verificaCampoPreenchido);
 inputSenha.addEventListener('blur', verificaCampoPreenchido);
 inputCofirmacao.addEventListener('blur', verificaCampoPreenchido);
 inputFile.addEventListener('change', onFileChange);
-form.addEventListener(
-    'submit',
-    async (evt) =>{
+form.addEventListener('submit',
+    async (evt) => {
 
         // Impedir o formulário de ser enviado...
         evt.preventDefault();
 
         // Levantando os dados do formulário
         let formData = new FormData(form);
-        
+
 
         // Construindo um objeto com os dados do formulário
         // let corpoDaRequisicao = {
@@ -54,20 +54,41 @@ form.addEventListener(
         let response = await fetch(
             'http://localhost:3000/api/v1/usuarios',
             {
-                method:'POST',
+                method: 'POST',
                 body: formData,
             }
         );
-        if(response.status == 409){alert("Usuário já cadstrado")}
-        if(response.status == 500){alert("Erro. Tente novamente mais tarde.")}
-        if(response.status == 201){
+        if (response.status == 409) { alert("Usuário já cadstrado") }
+        if (response.status == 500) { alert("Erro. Tente novamente mais tarde.") }
+        if (response.status == 201) {
             let usuario = await response.json();
             mostarApp(usuario);
         }
     }
 );
+formLogin.addEventListener('submit', onFormLoginSubmit);
 
-function mostarApp(usuario){
+function onFormLoginSubmit(evt) {
+    evt.preventDefault();
+    login();
+}
+
+async function login() {
+    //Capturar Login e senha
+    let email = document.getElementById('login-email').value;
+    let senha = document.getElementById('login-senha').value;
+    //Enviar rota
+    let responde = await fetch(
+        'api/v1/usuarios/login',
+        {
+            method: 'POST',
+            body: JSON.stringify({ email, senha }),
+            headers: { 'Content-Type': 'application/json' }
+        }
+    )
+}
+
+function mostarApp(usuario) {
     console.log(usuario)
     //Esconder a div de registro
     document.getElementById('registro').style.display = 'none';
@@ -77,10 +98,10 @@ function mostarApp(usuario){
     document.getElementById('app-nome').innerText = usuario.nome;
     let aEmail = document.getElementById('app-email');
     aEmail.innerText = usuario.email;
-    aEmail.setAttribute('href',`mailto:${usuario.email}`);
+    aEmail.setAttribute('href', `mailto:${usuario.email}`);
     let imgAvatar = document.getElementById('app-avatar');
-    imgAvatar.setAttribute('alt',`Foto de ${usuario.nome}`);
-    imgAvatar.setAttribute('src',`img/avatares/${usuario.foto}`);
+    imgAvatar.setAttribute('alt', `Foto de ${usuario.nome}`);
+    imgAvatar.setAttribute('src', `img/avatares/${usuario.foto}`);
 }
 
 

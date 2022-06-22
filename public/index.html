@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br" class="spectrum spectrum--medium spectrum--light">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,20 +9,21 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0');
     @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-    </style>
+  </style>
   <link rel="stylesheet" href="css/index.css">
 </head>
+
 <body>
-  
+
   <div id="login">
     <form id="formularioLogin">
       <label>
         <span>E-mail:</span>
-        <input type="email" name="email">
+        <input type="email" name="email" id="login-email">
       </label>
       <label>
         <span>Senha:</span>
-        <input type="password" name="senha">
+        <input type="password" name="senha" id="login-senha">
       </label>
       <div class="controles">
         <button>Cancelar</button>
@@ -75,9 +77,9 @@
         </div>
       </div>
     </header>
-  
+
     <main class="container">
-  
+
       <aside class="left">
         <h2>Amigos</h2>
         <section id="listaDeAmigos">
@@ -118,10 +120,10 @@
           </article>
         </section>
       </aside>
-      
+
       <section>
         <h2>Nova Publicação</h2>
-  
+
         <form id="formNovaPublicacao">
           <img src="img/placeholder.png" alt="Imagem dinâmica">
           <textarea id="textNovaPublicacao" placeholder="O que você tem em mente?"></textarea>
@@ -131,29 +133,37 @@
           </label>
           <button class="primary" type="submit">Publicar</button>
         </form>
-  
+
         <h2>Feed</h2>
-        
+
         <div id="feed">
           <article>
             Quero que a mágica aconteça!
             A gente consegue automatizar!
           </article>
-  
+
           <article>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis praesentium nostrum quia dolorum quam corrupti quo, obcaecati sequi quasi quod laborum magni laboriosam mollitia, neque illum ad pariatur quos molestiae.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis praesentium nostrum quia dolorum quam
+            corrupti quo, obcaecati sequi quasi quod laborum magni laboriosam mollitia, neque illum ad pariatur quos
+            molestiae.
           </article>
-  
+
           <article>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis praesentium nostrum quia dolorum quam corrupti quo, obcaecati sequi quasi quod laborum magni laboriosam mollitia, neque illum ad pariatur quos molestiae.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis praesentium nostrum quia dolorum quam
+            corrupti quo, obcaecati sequi quasi quod laborum magni laboriosam mollitia, neque illum ad pariatur quos
+            molestiae.
           </article>
-          
+
           <article>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis praesentium nostrum quia dolorum quam corrupti quo, obcaecati sequi quasi quod laborum magni laboriosam mollitia, neque illum ad pariatur quos molestiae.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis praesentium nostrum quia dolorum quam
+            corrupti quo, obcaecati sequi quasi quod laborum magni laboriosam mollitia, neque illum ad pariatur quos
+            molestiae.
           </article>
-          
+
           <article>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis praesentium nostrum quia dolorum quam corrupti quo, obcaecati sequi quasi quod laborum magni laboriosam mollitia, neque illum ad pariatur quos molestiae.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis praesentium nostrum quia dolorum quam
+            corrupti quo, obcaecati sequi quasi quod laborum magni laboriosam mollitia, neque illum ad pariatur quos
+            molestiae.
           </article>
           <!--
           <article>
@@ -172,28 +182,29 @@
   
           </article>
           -->
-  
+
         </div>
-        
+
       </section>
-      
+
       <aside class="right">
-        
+
         <div class="search-container">
           <input type="search" name="busca" id="busca" placeholder="Quem você procura?">
           <button class="primary">Buscar</button>
-        <a class="button" href="sss">Link para um lugar</a>
+          <a class="button" href="sss">Link para um lugar</a>
         </div>
-  
+
       </aside>
     </main>
-  
+
     <footer>
       <div class="container">&copy; My SóQueNão - Nenhum direito reservado. Use como quiser.</div>
     </footer>
   </div>
-  
+
   <script src="js/index.js"></script>
 
 </body>
+
 </html>

@@ -34,14 +34,14 @@ body {
 input[type=text],
 input[type=search],
 input[type=email],
-input[type=password]
- {
+input[type=password] {
     padding: 5px;
     border: none;
     font-size: 1rem;
 }
 
-button, .button {
+button,
+.button {
     display: inline-block;
     border: none;
     font-size: 0.8rem;
@@ -53,12 +53,14 @@ button, .button {
     border-radius: 4px;
 }
 
-button.primary, .button.primary{
+button.primary,
+.button.primary {
     background-color: var(--primary);
     color: var(--primary-lighter);
 }
 
-button.secondary, .button.secondary{
+button.secondary,
+.button.secondary {
     background-color: var(--secondary);
     color: var(--primary-lighter);
 }
@@ -72,7 +74,7 @@ textarea {
     transition: opacity 0.3s linear;
 }
 
-textarea:focus{
+textarea:focus {
     opacity: 1;
     outline: 1px solid var(--primary);
 }

@@ -1,4 +1,4 @@
-const {Usuario, sequelize} = require('../models');
+const { Usuario, sequelize } = require('../models');
 
 
 let u = Usuario.build({
@@ -7,7 +7,7 @@ let u = Usuario.build({
     senha: "lalala"
 })
 
-u.nAmigos().then(c=>console.log(c));
+u.nAmigos().then(c => console.log(c));
 
 Usuario.login("usuario1@teste.com", "123456").then(
     x => console.log(x)
