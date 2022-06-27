@@ -74,24 +74,45 @@ function onFormLoginSubmit(evt) {
 }
 
 async function login() {
-    //Capturar Login e senha
+    // Capturar o login e a senha digitadas pelo visitante
     let email = document.getElementById('login-email').value;
     let senha = document.getElementById('login-senha').value;
-    //Enviar rota
-    let responde = await fetch(
+
+    // Enviar a requisição para a rota
+    let response = await fetch(
         'api/v1/usuarios/login',
         {
             method: 'POST',
             body: JSON.stringify({ email, senha }),
-            headers: { 'Content-Type': 'application/json' }
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }
     )
+
+    // Verificar se o status da response é 200
+    if (response.status == 200) {
+
+        // Extraindo dados da response
+        let corpoDaResposta = await response.json();
+
+        // Salvar o token... (?)
+        sessionStorage.setItem('token', corpoDaResposta.token);
+        sessionStorage.setItem('usuario', JSON.stringify(corpoDaResposta.usuario));
+
+        // Mudar para página interna...
+        mostrarApp(corpoDaResposta.usuario);
+        // Carregar amigos do usuario
+        loadAmigos();
+    }
 }
 
-function mostarApp(usuario) {
+function mostrarApp(usuario) {
     console.log(usuario)
     //Esconder a div de registro
     document.getElementById('registro').style.display = 'none';
+    //Esconder a div de login
+    document.getElementById("login").style.display = 'none';
     //Mostar a div de App
     document.getElementById('app').style.display = 'block';
     //Preencher os locais com as informacoes do usuario
@@ -102,6 +123,19 @@ function mostarApp(usuario) {
     let imgAvatar = document.getElementById('app-avatar');
     imgAvatar.setAttribute('alt', `Foto de ${usuario.nome}`);
     imgAvatar.setAttribute('src', `img/avatares/${usuario.foto}`);
+}
+
+async function loadAmigos() {
+    //disparar requisicao para get /amigos
+    let response = await fetch(
+        '/api/v1/amigos',
+        {
+            method: 'GET',
+            headers: {
+                'Authorization': `bearer ${sessionStorage.getItem('token')}`
+            }
+        }
+    )
 }
 
 

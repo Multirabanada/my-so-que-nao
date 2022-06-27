@@ -54,8 +54,17 @@ module.exports = {
         let senhaOk = bcrypt.compareSync(senha, u.senha);
 
         if (senhaOk) {
-            //Criar token
+
+            //Extraindo o objeto literal do Model
             u = u.toJSON();
+
+            //Filtrando os campos desnecessarios p/ front
+            delete u.senha;
+            delete u.createdAt;
+            delete u.deletedAt;
+            delete u.updatedAt;
+
+            //Criar token
             let token = jwt.sign(u, 'SEGREDO');
             //Caso de sucesso: respondendo Ok
             return res.status(200).json({ msg: 'Sucesso', token });
