@@ -1,5 +1,6 @@
 @import url(geral.css);
 @import url(login.css);
+@import url(registro.css);
 
 #registro {
   display: none;

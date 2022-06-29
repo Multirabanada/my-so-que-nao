@@ -2,6 +2,7 @@ const { Usuario } = require('../models');
 const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
+require('dotenv').config();
 
 module.exports = {
     registrar: async (req, res) => {
@@ -65,9 +66,9 @@ module.exports = {
             delete u.updatedAt;
 
             //Criar token
-            let token = jwt.sign(u, 'SEGREDO');
+            let token = jwt.sign(u, process.env.JWT_SECRET);
             //Caso de sucesso: respondendo Ok
-            return res.status(200).json({ msg: 'Sucesso', token });
+            return res.status(200).json({usuario: u, token});
         } else {
             //Caso de falha: respondendo not OK
             return res.status(403).json(loginFail);

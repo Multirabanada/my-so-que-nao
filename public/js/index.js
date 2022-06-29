@@ -23,6 +23,8 @@ let inputCofirmacao = document.querySelector('#registro > form input[type=passwo
 let inputFile = document.querySelector('#registro > form input[type=file]');
 let form = document.getElementById('formularioCadastro');
 let formLogin = document.getElementById('formularioLogin');
+let linkRegistro = document.getElementById('linkRegistro');
+let linkLogin = document.getElementById('linkLogin');
 
 // 2 - Associar ao evento "perdeu o foco" uma função
 // 3 - A função vai avisar ao usuário que o campo de
@@ -32,8 +34,11 @@ inputEmail.addEventListener('blur', verificaCampoPreenchido);
 inputSenha.addEventListener('blur', verificaCampoPreenchido);
 inputCofirmacao.addEventListener('blur', verificaCampoPreenchido);
 inputFile.addEventListener('change', onFileChange);
+linkRegistro.addEventListener('click', onLinkRegistroClick);
+linkLogin.addEventListener('click', onLinkLoginClick);
+formLogin.addEventListener('submit', onFormLoginSubmit);
 form.addEventListener('submit',
-    async (evt) => {
+async (evt) => {
 
         // Impedir o formulário de ser enviado...
         evt.preventDefault();
@@ -66,7 +71,16 @@ form.addEventListener('submit',
         }
     }
 );
-formLogin.addEventListener('submit', onFormLoginSubmit);
+
+function onLinkRegistroClick(evt){
+    evt.preventDefault();
+    mostrarRegistro();
+}
+
+function onLinkLoginClick(evt){
+    evt.preventDefault();
+    mostrarLogin();
+}
 
 function onFormLoginSubmit(evt) {
     evt.preventDefault();
@@ -108,7 +122,6 @@ async function login() {
 }
 
 function mostrarApp(usuario) {
-    console.log(usuario)
     //Esconder a div de registro
     document.getElementById('registro').style.display = 'none';
     //Esconder a div de login
@@ -123,6 +136,34 @@ function mostrarApp(usuario) {
     let imgAvatar = document.getElementById('app-avatar');
     imgAvatar.setAttribute('alt', `Foto de ${usuario.nome}`);
     imgAvatar.setAttribute('src', `img/avatares/${usuario.foto}`);
+}
+
+function mostrarLogin(){
+    // Esconder a div de registro
+    document.getElementById("registro").style.display = 'none';
+
+    // Mostrar a div de login
+    document.getElementById("login").style.display = 'block'
+
+    // Mostrar a div da aplicação
+    document.getElementById("app").style.display = 'none';
+
+    // Por foco no campo inputNome
+    document.getElementById('login-email').focus();
+}
+
+function mostrarRegistro(){
+    // Mostrar a div de registro
+    document.getElementById("registro").style.display = 'block';
+
+    // Esconder a div de login
+    document.getElementById("login").style.display = 'none'
+
+    // Esconder a div da aplicação
+    document.getElementById("app").style.display = 'none';
+
+    // Por foco no campo inputNome
+    inputNome.focus();
 }
 
 async function loadAmigos() {
